@@ -4,31 +4,42 @@ public class Main {
 
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		int N = scan.nextInt();
-		int A = scan.nextInt();
-		int B = scan.nextInt();
+
+		String S = scan.nextLine();
 
 		scan.close();
 
-		int sum = 0;
-		int total = 0;
+		StringBuilder sb = new StringBuilder(S);
+		String reversedS = sb.reverse().toString();
 
-		for(int i = 1; i<=N; i++) {
-			sum = findSumOfDigit(i);
-			if(A <= sum && sum <= B) total += i;
+		String[] findings = {"dream","dreamer","erase","eraser"};
+
+		for(String s : findings) {
+			StringBuilder sb1 = new StringBuilder(s);
+			s = sb1.reverse().toString();
 		}
 
-		System.out.println(total);
-
-
-	}
-	static int findSumOfDigit(int num) {
-		int sum = 0;
-		while(num>0) {
-			sum += num%10;
-			num = num/10;
+		boolean flag = true;
+		for(int i = 0; i<S.length();) {
+			boolean flag2 = false;
+			for(int j =0; j<4;j++) {
+				String d = findings[j];
+				if(S.substring(i,d.length()).equals(d)) {
+					flag2 = true;
+					i += d.length();
+				}
+			}
+			if(!flag2) {
+				flag = false;
+				break;
+			}
 		}
-		return sum;
+
+		if(flag) {
+			System.out.print("YES");
+		}else {
+			System.out.print("NO");
+		}
 	}
 
 }
