@@ -1,4 +1,4 @@
-package practice20210113;
+package practice_20210113;
 
 import java.util.Arrays;
 import java.util.Comparator;
