@@ -1,3 +1,5 @@
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Scanner;
 
 public class Main {
@@ -6,20 +8,18 @@ public class Main {
 
 		Scanner scan = new Scanner(System.in);
 
-		String s = scan.next();
+		String A = scan.next();
+		String B = scan.next();
 
 		scan.close();
 
-		String[] slist = s.split("");
+		BigDecimal bigA = new BigDecimal(A);
+		BigDecimal bigB = new BigDecimal(B);
 
-		StringBuilder sb = new StringBuilder();
+		BigDecimal value = bigA.multiply(bigB).setScale(0, RoundingMode.DOWN);
 
-		for (int i = 0; i < slist.length; i += 2) {
-			sb.append(slist[i]);
-		}
 
-		System.out.print(sb.toString());
-
+		System.out.print(value);
 	}
 
 }
