@@ -1,10 +1,11 @@
+package practice_20210117;
+
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Main {
+public class Addition {
 
 	public static void main(String[] args) {
-
 		Scanner scan = new Scanner(System.in);
 
 		Integer[] array = new Integer[3];
@@ -34,6 +35,7 @@ public class Main {
 
 
 		System.out.print(answer);
+
 	}
 
 }
