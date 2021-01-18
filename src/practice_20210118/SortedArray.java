@@ -1,6 +1,8 @@
+package practice_20210118;
+
 import java.util.Scanner;
 
-public class Main {
+public class SortedArray {
 
 	public static void main(String[] args) {
 
@@ -32,5 +34,7 @@ public class Main {
 			}
 		}
 		System.out.println(splitNum);
+
 	}
+
 }
