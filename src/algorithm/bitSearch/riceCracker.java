@@ -26,20 +26,24 @@ public class riceCracker {
 	static int count(int[][] array, int row, int column) {
 		int max = 0;
 		int count = 0;
-		for(int i = 1; i < Math.pow(2, row+1); i++) {
-			for(int j = 1; j < Math.pow(2, column+1); j++) {
-				count = 0;
+		int pattern1, pattern2 = 0;
+		for(int i = 0; i < Math.pow(2, row+1); i++) {
+			count = 0;
+			for(int c = 0; c < column ; c++) {
+				pattern1 = 0;
+				pattern2 = 0;
 				for(int r = 0; r < row ; r++) {
-					for(int c = 0; c < column ; c++) {
-						if(((r & (i>>1)) >= 1) ^ ((c & (j>>1)) >= 1)) {
-							count = array[r][c] == 1 ? count+1 : count;
-						} else {
-							count = array[r][c] == 0 ? count+1 : count;
-						}
+					if((((int)Math.pow(2, r) & i) >= 1)) {
+						pattern1 = array[r][c] == 0 ? pattern1+1 : pattern1;
+						pattern2 = array[r][c] == 1 ? pattern2+1 : pattern2;
+					} else {
+						pattern1 = array[r][c] == 1 ? pattern1+1 : pattern1;
+						pattern2 = array[r][c] == 0 ? pattern2+1 : pattern2;
 					}
 				}
-				max = max > count ? max : count;
+				count = pattern1 > pattern2 ? count + pattern1 : count + pattern2;
 			}
+			max = max > count ? max : count;
 		}
 
 		return max;
