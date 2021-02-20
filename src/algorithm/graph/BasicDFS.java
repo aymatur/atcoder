@@ -13,6 +13,7 @@ public class BasicDFS {
 
 	static int first_ptr = 0;
 	static int last_ptr = 0;
+	static int ptr = 0;
 
 	public static void main(String[] args) {
 
@@ -65,8 +66,6 @@ public class BasicDFS {
 
 		first_ptr++;
 		first_order[v] = first_ptr;
-		System.out.println("first_order["+v+"]: "+", "+first_order[v]);
-		System.out.println("");
 		seen[v] = true;
 
 		for(Integer g : graph.get(v)) {
@@ -76,7 +75,21 @@ public class BasicDFS {
 
 		last_ptr++;
 		last_order[v] = last_ptr;
-		System.out.println("last_order["+v+"]: "+", "+last_order[v]);
+	}
+
+	static void dfsTimestamp(List<List<Integer>> graph, int v) {
+
+		ptr++;
+		first_order[v] = ptr;
+		seen[v] = true;
+
+		for(Integer g : graph.get(v)) {
+			if(seen[g]) continue;
+			dfs(graph, g);
+		}
+
+		ptr++;
+		last_order[v] = ptr;
 	}
 
 }
