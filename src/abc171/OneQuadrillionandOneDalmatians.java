@@ -26,7 +26,7 @@ public class OneQuadrillionandOneDalmatians {
 		long remain = N;
 		long surplus = 0;
 		char add = 0;
-		int i = 0;
+//		int i = 0;
 		while(remain > 0) {
 
 			surplus = remain%26;

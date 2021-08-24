@@ -30,46 +30,33 @@ public class SnukeFestival {
 		Arrays.sort(b);
 		Arrays.sort(c);
 
-		int ans = countPattern(a, b, c, n);
+		int ans = 0;
+
+		for(int i = 0; i < n; i++) {
+			int anum = binarySearch(a, b[i]) + 1;
+			int cnum = n - binarySearch(c, b[i]) 	- 1;
+			ans += anum*cnum;
+		}
 
 		System.out.print(ans);
 
+
 	}
 
-	static int countPattern(int[] a, int[] b, int[] c, int length) {
+	static int binarySearch(int[] numArray, int target) {
 
-		int count = 0;
-		if(a[0] >= b[length - 1]) return count;
-		if(b[0] >= c[length - 1]) return count;
-		for(int i = 0; i < length; i++) {
-			if(a[i] >= b[length - 1]) continue;
-			int bIndex = binary_search(b, a[i]);
-			if(b[bIndex] >= c[length - 1]) continue;
-			for(int j = bIndex; j < length; j++) {
-				int cIndex = binary_search(c, b[j]);
-				count = count + length - cIndex;
-			}
+		int right = numArray.length;
+		int left = -1;
+
+		while(right - left > 1) {
+			int mid = (right + left)/2;
+			if(numArray[mid] > target) right = mid;
+			else left = mid;
 		}
-		return count;
-	}
 
-	static boolean isOK(int[] array, int index, int key) {
-	    if (array[index] > key) return true;
-	    else return false;
+		return right;
+
 	}
 
 
-	static int binary_search(int[] array, int key) {
-	    int left = -1;
-	    int right = array.length;
-
-	    while (right - left > 1) {
-	        int mid = left + (right - left) / 2;
-
-	        if (isOK(array, mid, key)) right = mid;
-	        else left = mid;
-	    }
-
-	    return right;
-	}
 }

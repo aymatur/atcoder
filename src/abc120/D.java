@@ -9,8 +9,11 @@ public class D {
 		Scanner scan = new Scanner(System.in);
 
 		int n = scan.nextInt();
+		int m = scan.nextInt();
 
 		UnionFind uf = new UnionFind(n);
+
+		int[] bridge = new int[m];
 
 		for(int i = 0; i < n; i++) {
 			int a = scan.nextInt() - 1;
@@ -66,6 +69,10 @@ public class D {
 			int tmp = x;
 			x = y;
 			y = tmp;
+		}
+
+		void destroy(int x) {
+			par[x] = -1;
 		}
 	}
 }

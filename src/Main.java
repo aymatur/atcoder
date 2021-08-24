@@ -4,33 +4,47 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		Scanner scan = new Scanner(System.in);
-		int N = scan.nextInt();
 
-		Integer[] array = new Integer[N];
+		Scanner sc = new Scanner(System.in);
 
-		for(int i = 0; i<N;i++) {
-			array[i] = scan.nextInt();
+		int N = sc.nextInt();
+
+		int[] A = new int[100001];
+
+		int in = 0;
+
+		long sum = 0;
+
+		for(int i = 0; i < N; i++) {
+			in = sc.nextInt();
+			A[in]++;
+			sum += in;
 		}
 
+		int Q = sc.nextInt();
 
-		scan.close();
+		int[] B = new int[Q];
+		int[] C = new int[Q];
 
-		int start = 0;
-		int splitNum = 1;
-
-		for(int i = 1; i < N - 1 ; i++) {
-			if(
-				(array[i+1] > array[i] && array[i] < array[start])
-				||
-				(array[i+1] < array[i] && array[i] > array[start])
-					) {
-				splitNum++;
-				i++;
-				start = i;
-				if(i >= N-1) break;
-			}
+		for(int i = 0; i < Q; i++) {
+			B[i] = sc.nextInt();
+			C[i] = sc.nextInt();
 		}
-		System.out.println(splitNum);
+
+		sc.close();
+
+		int num = 0;
+		int diff = 0;
+
+		for(int i = 0; i < Q; i++) {
+			num = A[B[i]];
+			diff = C[i] - B[i];
+			sum += diff*num;
+			A[C[i]] += A[B[i]];
+			A[B[i]] = 0;
+			System.out.println(sum);
+		}
+
 	}
+
 }
