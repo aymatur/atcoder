@@ -20,16 +20,19 @@ int main()
     }
 
     vector<vector<int>> dp(1 << V, vector<int>(V, -1));
-    dp[1][0];
+    dp[1][0] = 0;
     for (int i = 0; i < (1 << V); i++) {
         bitset<15> bits(i);
         for (int s = 0; s < V; s++) {
+            // sはbitsの集合に含まれている必要がある
             if (!bits.test(s)) continue;
             int cost_s = dp[i][s];
+            // 到達できていない場合は次
             if (cost_s == -1) continue;
              for (auto pr : graph.at(s)) {
                  int d = pr.first;
                  int t = pr.second;
+                 // これから訪問予定のtは訪問済みの集合bitsに含まれていてはいけない
                  if (bits.test(t)) continue;
                  int cost_t = cost_s + d;
                  int j = i | (1 << t);
