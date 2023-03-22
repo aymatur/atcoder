@@ -16,14 +16,16 @@ int main() {
         cin >> s >> t >> d >> time;
         s--;
         t--;
-        graph.at(s).push_back({{d, time}, t});
-        graph.at(t).push_back({{d, time}, s});
+        if (t != 0) graph.at(s).push_back({{d, time}, t});
+        if (s != 0) graph.at(t).push_back({{d, time}, s});
         if (t == 0) to0_vec.push_back({{d, time}, s});
+        if (s == 0) to0_vec.push_back({{d, time}, t});
     }
 
     vector<vector<pair<long long, long long>>> dp(1 << N, vector<pair<long long, long long>>(N, {-1, 0}));
 
-    dp[1][0] = make_pair(0, 0);
+    dp[1][0] = make_pair(0, 1);
+
     for (int i = 0; i < (1 << N); i++) {
         bitset<20> bits(i);
         for (int s = 0; s < N; s++) {
@@ -47,8 +49,8 @@ int main() {
             }
         }
     }
-    int min_cost = -1;
-    int ans = 0;
+    long long min_cost = -1;
+    long long ans = 0;
     int all((1 << N) - 1);
     for (auto pr : to0_vec) {
         long long d = pr.first.first;
@@ -59,9 +61,15 @@ int main() {
         long long cost_t = cost_s + d;
         if (cost_t > time) continue;
         if (min_cost == -1 || min_cost > cost_t) {
+            // cout << "min_cost " << min_cost << endl;
+            // cout << "cost_t " << cost_t << endl;
+            // cout << "s " << s << endl;
             min_cost = cost_t;
             ans = dp[all][s].second;
         } else if (min_cost == cost_t) {
+            // cout << "min_cost " << min_cost << endl;
+            // cout << "cost_t " << cost_t << endl;
+            // cout << "s " << s << endl;
             ans += dp[all][s].second;
         }
     }
