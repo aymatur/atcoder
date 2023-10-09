@@ -7,7 +7,7 @@ int main() {
     int N, K;
     cin >> N >> K;
     vector<int> a(K), b(K);
-    vectot<int> p(101, -1);
+    vector<int> p(101, -1);
     for (int i = 0; i < K; i++) {
         cin >> a[i] >> b[i];
         a[i]--, b[i]--;
@@ -32,7 +32,7 @@ int main() {
         }
     }
     long long ans = 0;
-    for (itn i = 0; i < 3; i++) for (int j = 0; j < 3; j++) {
+    for (int i = 0; i < 3; i++) for (int j = 0; j < 3; j++) {
         ans += dp[N][i][j];
         ans %= 10000;
     }
